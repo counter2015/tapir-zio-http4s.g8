@@ -9,9 +9,11 @@ sbt new counter2015/tapir-zio-http4s.g8
 
 ## Introduction
 It includes following default library dependency
-- [logback](http://logback.qos.ch/), scala-logging: log
-- [scalaTest](http://www.scalatest.org/): test
-- [typesafe config](https://github.com/lightbend/config): config
+- [tapir](https://tapir.softwaremill.com/) Typed API descRiptions
+- [circe](https://circe.github.io/circe/) JSON library
+- [zio](https://zio.dev) effect
+- [http4s](https://http4s.org) http server and client
+- [logback](http://logback.qos.ch/) log framework
 
 The scala tools and version are:
 - Scala 2.13.7
