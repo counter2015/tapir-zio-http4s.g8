@@ -2,7 +2,6 @@ package service.http
 
 import cats.implicits._
 import layer.{AllEnv, all}
-import org.http4s.HttpRoutes
 import org.http4s.blaze.server.BlazeServerBuilder
 import org.http4s.server.Router
 import org.http4s.syntax.kleisli._
