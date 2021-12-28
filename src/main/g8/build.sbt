@@ -6,12 +6,15 @@ ThisBuild / version := "0.1.0-SNAPSHOT"
 // for cats Kleisli
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full)
 
+// Automatically reload the build when source changes are detected
+Global / onChangedBuildSource := ReloadOnSourceChanges
+
 scalacOptions ++= Seq(
   "-feature", // Emit warning and location for usages of features that should be imported explicitly.
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
   "-encoding", "utf-8", // Specify character encoding used by source files.
   "-explaintypes", // Explain type errors in more detail.
-  "-Ymacro-annotations", // cirece @JsonCodec
+  "-Ymacro-annotations", // circe @JsonCodec
   "-Vimplicits",
   "-Vtype-diffs",
   "-Wunused",

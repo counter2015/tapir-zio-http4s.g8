@@ -2,13 +2,12 @@ package service.http
 
 import cats.implicits._
 import layer.{AllEnv, all}
+import org.http4s.HttpRoutes
 import org.http4s.blaze.server.BlazeServerBuilder
 import org.http4s.server.Router
-import org.http4s.syntax.kleisli._
-import routes.PetRoutes
-import sttp.tapir.docs.openapi._
-import sttp.tapir.openapi.circe.yaml.RichOpenAPI
-import sttp.tapir.swagger.http4s.SwaggerHttp4s
+import routes._
+import sttp.tapir.server.http4s.ztapir.ZHttp4sServerInterpreter
+import sttp.tapir.swagger.bundle.SwaggerInterpreter
 import zio.interop.catz._
 import zio.{ExitCode, RIO, URIO, ZIO}
 
@@ -17,21 +16,27 @@ object Server extends CatsApp {
 
   override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] = {
 
-    val doc = OpenAPIDocsInterpreter().toOpenAPI(
-       PetRoutes.allEndpoints,
-      "example-project",
-      "0.0.1",
-    ).toYaml
+    val doc = SwaggerInterpreter().fromEndpoints[RIO[AllEnv, *]](
+      PetRoutes.allEndpoints ++ FileRoutes.allEndpoints,
+      "Our pets",
+      "1.0")
+
+    val swaggerRoutes: HttpRoutes[RIO[AllEnv, *]] =
+      ZHttp4sServerInterpreter()
+        .from(doc)
+        .toRoutes
 
     val allRoutes = Router("/" ->(
         PetRoutes.allRoutes <+>
-        new SwaggerHttp4s(doc).routes
+        FileRoutes.allRoutes <+>
+        swaggerRoutes
       )).orNotFound
 
 
     val io = ZIO.runtime[AllEnv].flatMap { implicit runtime =>
-      BlazeServerBuilder[RIO[AllEnv, *]](runtime.platform.executor.asEC)
-        .bindHttp(8080, "localhost")
+      BlazeServerBuilder[RIO[AllEnv, *]]
+        .withExecutionContext(runtime.platform.executor.asEC)
+        .bindHttp(8080, "0.0.0.0")
         .withHttpApp(allRoutes)
         .serve
         .compile

@@ -16,7 +16,7 @@ object PetLayer {
       new Service {
         override def find(id: Int): ZIO[Logging, String, Pet] = {
           for {
-            _ <- logging.info(s"Got request for pet: \$id")
+            _ <- logging.info(s"Got request for pet: $id")
             res <- if (id == 32) {
               UIO(Pet("Tapirus terrestris", "https://en.wikipedia.org/wiki/Tapir"))
             } else {
