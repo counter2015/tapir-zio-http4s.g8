@@ -4,18 +4,19 @@ import layer.AllEnv
 import layer.PetLayer.PetService
 import model.Pet
 import org.http4s.HttpRoutes
-import sttp.tapir.PublicEndpoint
 import sttp.tapir.generic.auto._
-import sttp.tapir.json.circe._
+import sttp.tapir.json.circe.jsonBody
 import sttp.tapir.server.http4s.ztapir.ZHttp4sServerInterpreter
 import sttp.tapir.ztapir._
 import zio.ZIO
 import zio.clock.Clock
+import zio.interop.catz._
 import zio.logging.Logging
+
 
 object PetRoutes {
 
-  val petEndpoint: PublicEndpoint[Int, String, Pet, Any] =
+  val petEndpoint =
     endpoint
       .get
       .in("pet")
@@ -29,7 +30,7 @@ object PetRoutes {
     PetService.find(petId)
   }
 
-  val petRouter: ZServerEndpoint[Logging with PetService, Any] =
+  val petRouter =
     petEndpoint
       .zServerLogic(petLogic)
 
@@ -37,7 +38,7 @@ object PetRoutes {
     petEndpoint,
   )
 
-  val allRoutes: HttpRoutes[zio.ZIO[AllEnv with Clock, Throwable, *]] = ZHttp4sServerInterpreter().from(List(
+  val allRoutes: HttpRoutes[zio.ZIO[AllEnv with Clock, Throwable, *]] = ZHttp4sServerInterpreter.from(List(
     petRouter.widen[AllEnv],
   )).toRoutes
 }
