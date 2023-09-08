@@ -16,8 +16,8 @@ It includes following default library dependency
 - [logback](http://logback.qos.ch/) log framework
 
 The scala tools and version are:
-- Scala 2.13.7
-- sbt 1.6.0
+- Scala 2.13.12
+- sbt 1.9.4
 
 ## Template structure
 The project generate by g8 template will have the same structure of `src/main/g8`

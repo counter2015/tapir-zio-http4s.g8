@@ -1,6 +1,6 @@
 import Dependencies._
 
-ThisBuild / scalaVersion := "2.13.7"
+ThisBuild / scalaVersion := "2.13.12"
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
 // for cats Kleisli
@@ -30,6 +30,7 @@ lazy val root = (project in file(".")).
       "-encoding", "utf-8", // Specify character encoding used by source files.
       "-explaintypes", // Explain type errors in more detail.
       "-feature", // Emit warning and location for usages of features that should be imported explicitly.
-    )
+    ),
+    fork := true
   )
 

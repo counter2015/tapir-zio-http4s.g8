@@ -1,13 +1,12 @@
 import layer.PetLayer.PetService
-import zio.{ULayer, ZEnv, ZLayer}
-import zio.logging.Logging
+import zio._
 
 package object layer {
-  type AllEnv = PetService with ZEnv with Logging
+  type AllEnv = PetService
 
-  val petLayer: ZLayer[Logging, String, PetService] = PetService.live
+  val petLayer: ZLayer[Any, String, PetService] = PetService.live
 
-  val loggingLayer: ULayer[Logging] = LoggingLayer.live
+  val loggingLayer  = LoggingLayer.live
 
-  val all: ZLayer[Any, String, AllEnv] = ZEnv.live >+> loggingLayer >+> petLayer
+  val all: ZLayer[Any, String, AllEnv] = petLayer
 }

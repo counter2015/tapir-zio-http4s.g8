@@ -1,7 +1,6 @@
 <configuration>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <withJansi>true</withJansi>
         <encoder>
             <pattern>%date [%level] from %logger{15}- %message%n%xException</pattern>
         </encoder>
