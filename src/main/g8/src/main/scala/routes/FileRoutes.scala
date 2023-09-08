@@ -27,7 +27,7 @@ object FileRoutes {
 
   def uploadLogic(id: String, form: FileForm): ZIO[Logging, Nothing, String] = {
     for {
-      _ <- Logging.info(s"got upload file request, id is $id")
+      _ <- Logging.info(s"got upload file request, id is \$id")
     } yield form.file.fileName.getOrElse("file name not found")
   }
 
