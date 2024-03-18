@@ -8,7 +8,7 @@ object Dependencies {
     "com.softwaremill.sttp.tapir" %% "tapir-http4s-server-zio" % tapirVersion,
     "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % tapirVersion,
     "com.softwaremill.sttp.tapir" %% "tapir-redoc-bundle" % tapirVersion,
-    "org.http4s" %% "http4s-blaze-server" % "0.23.14"
+    "org.http4s" %% "http4s-blaze-server" % "0.23.16"
   )
 
   val zioLoggingVersion = "2.1.12"
