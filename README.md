@@ -17,7 +17,7 @@ It includes following default library dependency
 
 The scala tools and version are:
 - Scala 2.13.12
-- sbt 1.9.4
+- sbt 1.9.9
 
 ## Template structure
 The project generate by g8 template will have the same structure of `src/main/g8`
