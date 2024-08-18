@@ -13,7 +13,7 @@ object Dependencies {
 
   val zioLoggingVersion = "2.3.0"
   val log =  Seq(
-    "ch.qos.logback" % "logback-classic" % "1.5.6",
+    "ch.qos.logback" % "logback-classic" % "1.5.7",
     "dev.zio" %% "zio-logging" % zioLoggingVersion,
     "dev.zio" %% "zio-logging-slf4j" % zioLoggingVersion,
   )
