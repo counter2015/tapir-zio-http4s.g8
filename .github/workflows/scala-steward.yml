@@ -17,6 +17,9 @@ jobs:
           distribution: 'adopt'
           java-version: '21'
 
+      - name: Install sbt
+        uses: sbt/setup-sbt@v1
+
       - name: checkout
         uses: actions/checkout@v4
 
