@@ -2,7 +2,7 @@ import sbt._
 
 object Dependencies {
 
-  val tapirVersion = "1.11.33"
+  val tapirVersion = "1.11.34"
 
   val tapir = Seq(
     "com.softwaremill.sttp.tapir" %% "tapir-http4s-server-zio" % tapirVersion,
