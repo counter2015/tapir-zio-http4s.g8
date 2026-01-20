@@ -11,7 +11,7 @@ object Dependencies {
     "org.http4s" %% "http4s-blaze-server" % "0.23.17"
   )
 
-  val zioLoggingVersion = "2.5.2"
+  val zioLoggingVersion = "2.5.3"
   val log =  Seq(
     "ch.qos.logback" % "logback-classic" % "1.5.25",
     "dev.zio" %% "zio-logging" % zioLoggingVersion,
